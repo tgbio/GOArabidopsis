@@ -61,7 +61,7 @@ for (q in qtl_at_id_file) { # loop over each csv filename in list qtl_at_id_file
       print(sigTerm)
       
       #adapted from the org.At.tair.db vignette for org.At.tairGO2ALLTAIRS
-      # provides mappings between a given GO identifier and all TAIR identifiers annotated at that GO term or one of its children in the GO ontology
+      #provides mappings between a given GO identifier and all TAIR identifiers annotated at that GO term or one of its children in the GO ontology
       #mapped.list is a list with names = GO ids, values = a named list with values of AT ids and names of evidence codes
       
       csv.out = paste(outfilename, "_GO_signif_ATIDs.csv", sep = "")
