@@ -20,6 +20,7 @@ if(length(mapped.list) > 0) {
   str(mapped.list[1:5])
   
   #get the gene id corresponding to AT id "AT1G01010"
+  #similar to a Python dictionary
   mapped.list["AT1G01010"]
 }
 
@@ -32,7 +33,6 @@ at_ids = read.table("AT_ids_between_markers_example.csv",header=F)$V1 # read AT 
 gi_ids = c("")
 
 for (i in 1:length(at_ids)){
-  #at_index = grep(as.character(at_ids[i]), names(mapped.list), fixed=TRUE, value = FALSE)
   gid = mapped.list[at_ids[i]]
   print(gid)
   gi_ids = append(gi_ids, gid)
