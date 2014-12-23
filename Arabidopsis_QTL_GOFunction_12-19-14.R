@@ -30,8 +30,10 @@ qtl_at_id_file = list("AT_ids_between_markers_example.csv")
 #
 at_ids = read.table("AT_ids_between_markers_example.csv",header=F)$V1 # read AT IDs of protein coding genes within region into a vector
 
-gi_ids = c("")
+gi_ids = ""
 
+
+#there appears to be something wrong here with the variables, confusion of names
 for (i in 1:length(at_ids)){
   gid = mapped.list[at_ids[i]]
   print(gid)
@@ -39,12 +41,14 @@ for (i in 1:length(at_ids)){
 }
 
 gi_ids = as.character(gi_ids)
+gi_ids = as.factor(gi_ids)
 
 ont_type = list("MF", "BP", "CC")
 
 for (q in qtl_at_id_file) { # loop over each csv filename in list qtl_at_id_file
-  #qtl_genes = read.csv(q,header=F)$V1 # read AT IDs of protein coding genes within QTL region into a vector
-  qtl_genes = gi_ids
+  qtl_genes = read.csv(q,header=F)$V1 # read AT IDs of protein coding genes within QTL region into a vector
+  #str(qtl_genes)
+  q#tl_genes = gi_ids
   
   for (o in ont_type) { # for each type of ontology
     print(o)
@@ -58,7 +62,8 @@ for (q in qtl_at_id_file) { # loop over each csv filename in list qtl_at_id_file
     print(qtl_genes)
     sigTerm = GOFunction(qtl_genes, mapped.at.genes, organism="org.At.tair.db", ontology=o, fdrmethod="BY", fdrth=0.05, ppth=0.05, pcth=0.05, poth=0.05, peth=0.05, bmpSize=2000, filename=outfilename) # find GO terms enriched in region
     if(length(sigTerm) > 0){
-      print(sigTerm)
+      print("sigTerm")
+      #print(sigTerm)
       
       #adapted from the org.At.tair.db vignette for org.At.tairGO2ALLTAIRS
       #provides mappings between a given GO identifier and all TAIR identifiers annotated at that GO term or one of its children in the GO ontology
