@@ -1,4 +1,4 @@
 "goid","name","refnum","interestnum","pvalue","adjustp","FinalResult"
-"GO:0008037","cell recognition",40,16,1.15777720743893e-10,2.37465620638497e-06,"Local"
-"GO:0009875","pollen-pistil interaction",44,16,6.22620177637145e-10,8.51349096381626e-06,"Local"
-"GO:0048544","recognition of pollen",39,16,7.32010008164252e-11,2.37465620638497e-06,"Final"
+"GO:0008037","cell recognition",40,16,1.15777720743893e-10,2.34687969484596e-06,"Local"
+"GO:0009875","pollen-pistil interaction",44,16,6.22620177637145e-10,8.41390809394321e-06,"Local"
+"GO:0048544","recognition of pollen",39,16,7.32010008164252e-11,2.34687969484596e-06,"Final"
