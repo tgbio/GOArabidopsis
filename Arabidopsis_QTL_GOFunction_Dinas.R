@@ -19,9 +19,15 @@ if(length(mapped.list) > 0) { #ensures that the mapped list contains values
 
 qtl_at_id_file = list("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI")#names the file of at qlt
 
-at_ids = read.table("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI",header=F)$V1 # read AT IDs of protein coding genes within region into a vector
+all_ids = read.table("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI",header=F)$V1 # read AT IDs of protein coding genes within region into a vector
 #This cannot take a variable as an argument
+head(all_ids, 100)
+at_gene_ids = all_ids$13[all_ids$18 == "Arabidopsis thaliana"]
+
+
+
 gi_ids = "" #creates an empty list
+
 
 
 #there appears to be something wrong here with the variables, confusion of names
