@@ -1,6 +1,0 @@
-"goid","name","refnum","interestnum","pvalue","adjustp","FinalResult"
-"GO:0004499","N,N-dimethylaniline monooxygenase activity",29,10,1.79087852991699e-06,0.0186223818780018,"Final"
-"GO:0004866","endopeptidase inhibitor activity",40,11,6.7155031862054e-06,0.034915451480188,"Final"
-"GO:0043531","ADP binding",167,26,1.39383927000303e-06,0.0186223818780018,"Final"
-"GO:0061135","endopeptidase regulator activity",40,11,6.7155031862054e-06,0.034915451480188,"Local"
-"GO:0080103","4-methylthiopropyl glucosinolate S-oxygenase activity",4,4,8.93044167793455e-06,0.0371451424510468,"Global"

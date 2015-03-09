@@ -1,4 +1,8 @@
+#source("http://bioconductor.org/biocLite.R")
+#biocLite("GOFunction")
 library('GOFunction')
+#source("http://bioconductor.org/biocLite.R")
+#biocLite("org.At.tair.db")
 library('org.At.tair.db')
 
 #retrieve mapping between TAIR ID and Entrez Gene identifiers
@@ -17,9 +21,9 @@ if(length(mapped.list) > 0) { #ensures that the mapped list contains values
   mapped.list["AT1G01010"]######END TEST
 } 
 
-qtl_at_id_file = list("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI")#names the file of at qlt
+qtl_at_id_file = list("CORRECTEDTESTLOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI.csv")#names the file of at qlt
 
-at_ids = read.table("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI",header=F)$V1 # read AT IDs of protein coding genes within region into a vector
+at_ids = read.csv("CORRECTEDTESTLOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI.csv",header=F)$V13 # read AT IDs of protein coding genes within region into a vector
 #This cannot take a variable as an argument
 gi_ids = "" #creates an empty list
 
@@ -27,10 +31,12 @@ gi_ids = "" #creates an empty list
 #there appears to be something wrong here with the variables, confusion of names
 #this section uses the at id's identified for the region and compiles a list of entrez gene id's with them via the mapping
 for (i in 1:length(at_ids)){ #for variable within the length range of at_ids
-  gid = mapped.list[at_ids[i]] #gid is the mapping of that at_id
-  print(gid) #print the Entrez gene ID corresponding to the at id
-  gi_ids = append(gi_ids, gid) #appends the list made before with the gid of the atid
-} 
+  for (k in mapped.list) { #the GI from mapped list look 
+    print(k) #very different from the GI from the at_ids/CSV file...
+    print(at_ids[i])
+    if(k==at_ids[i])#############SAY "GI" %in% mapped.list[values] #### basically going the other way so asking is this Gene ID in the values of AT ID mapped list? if so what is the key [the at id]
+      gi_ids = c(gi_ids,k)}}
+  
 gi_char = as.character(gi_ids) #converts the list of gene ids to character vector 
 #this is done because the factor values need to be characters
 gi_fac = as.factor(gi_char)#converts the character list of GIs to a factor list
@@ -38,7 +44,7 @@ gi_fac = as.factor(gi_char)#converts the character list of GIs to a factor list
 
 ont_type = list("MF", "BP", "CC") #defines a list of ontology types
 for (q in qtl_at_id_file) { # loop over each csv filename in list qtl_at_id_file
-  qtl_genes = read.csv(q,header=F)$V1 # read AT IDs of protein coding genes within QTL region into a vector
+  qtl_genes = read.csv(q,header=F)$V13 # read AT IDs of protein coding genes within QTL region into a vector
   #str(qtl_genes)      ##########Not sure why these are here
   #qtl_genes = gi_ids  ##########Not sure why these are here
   for (o in ont_type) { # for each type of ontology
