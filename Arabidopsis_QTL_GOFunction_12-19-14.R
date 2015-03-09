@@ -17,9 +17,9 @@ if(length(mapped.list) > 0) { #ensures that the mapped list contains values
   mapped.list["AT1G01010"]######END TEST
 } 
 
-qtl_at_id_file = list("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI")#names the file of at qlt
+qtl_at_id_file = list("AT_ids_between_markers_example.csv")#names the file of at qlt
 
-at_ids = read.table("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI",header=F)$V1 # read AT IDs of protein coding genes within region into a vector
+at_ids = read.table("AT_ids_between_markers_example.csv",header=F)$V1 # read AT IDs of protein coding genes within region into a vector
 #This cannot take a variable as an argument
 gi_ids = "" #creates an empty list
 
