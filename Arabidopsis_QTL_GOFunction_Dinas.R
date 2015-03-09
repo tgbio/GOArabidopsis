@@ -19,16 +19,36 @@ if(length(mapped.list) > 0) { #ensures that the mapped list contains values
 
 qtl_at_id_file = list("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI")#names the file of at qlt
 
-all_ids = read.table("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI",header=F)$V1 # read AT IDs of protein coding genes within region into a vector
+all_ids = read.csv("CORRECTEDTESTLOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI.csv",header=F) # read AT IDs of protein coding genes within region into a vector
 #This cannot take a variable as an argument
 head(all_ids, 100)
-at_gene_ids = all_ids$13[all_ids$18 == "Arabidopsis thaliana"]
+at_gene_ids = all_ids$V13[all_ids$V18 == "Arabidopsis thaliana"]
+
+#Map gene ids to Entrez ids
+
+listMarts()
+tairmart=useMart("Public_TAIRV10")
+tairmart=useMart("ENSEMBL_MART_PLANT")
+ 
+listDatasets(tairmart)
+#filters = listFilters(arabidopsismart)
+tairmart = useDataset("athaliana_eg_gene",mart=tairmart)
+
+filters = listFilters(tairmart)
+filters
+attributes = listAttributes(tairmart)
+attributes
+
+#values = list of gene ids from corrected test local blast
+#attributes = tair ids
+#filters = gene ids
 
 
 
 gi_ids = "" #creates an empty list
 
-
+attributes = listAttributes(tairmart)
+attributes
 
 #there appears to be something wrong here with the variables, confusion of names
 #this section uses the at id's identified for the region and compiles a list of entrez gene id's with them via the mapping
