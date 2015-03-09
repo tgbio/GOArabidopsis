@@ -1,5 +1,13 @@
-library('GOFunction')
+#source("http://bioconductor.org/biocLite.R")
+#biocLite("org.At.tair.db")
 library('org.At.tair.db')
+#source("http://bioconductor.org/biocLite.R")
+#biocLite("GOFunction")
+library('GOFunction')
+#source("http://bioconductor.org/biocLite.R")
+#biocLite("biomaRt")
+library('biomaRt')
+
 
 #retrieve mapping between TAIR ID and Entrez Gene identifiers
 all.at.genes <- org.At.tairENTREZID #maps between TAIR acc. #s and NCBI Entrez Gene IDs
@@ -17,14 +25,17 @@ if(length(mapped.list) > 0) { #ensures that the mapped list contains values
   mapped.list["AT1G01010"]######END TEST
 } 
 
-qtl_at_id_file = list("LOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI")#names the file of at qlt
+qtl_at_id_file = list("CORRECTEDTESTLOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI.csv")#names the file of at qlt
 
 all_ids = read.csv("CORRECTEDTESTLOCALBLAST_QGG24G02.yg.ab1_CLS_S3_Contig10858_LettuceNCBI.csv",header=F) # read AT IDs of protein coding genes within region into a vector
 #This cannot take a variable as an argument
 head(all_ids, 100)
 at_gene_ids = all_ids$V13[all_ids$V18 == "Arabidopsis thaliana"]
+<<<<<<< Updated upstream
 
 #Map gene ids to Entrez ids
+=======
+>>>>>>> Stashed changes
 
 listMarts()
 tairmart=useMart("Public_TAIRV10")
@@ -45,11 +56,14 @@ attributes
 
 
 
+<<<<<<< Updated upstream
 gi_ids = "" #creates an empty list
 
 attributes = listAttributes(tairmart)
 attributes
 
+=======
+>>>>>>> Stashed changes
 #there appears to be something wrong here with the variables, confusion of names
 #this section uses the at id's identified for the region and compiles a list of entrez gene id's with them via the mapping
 for (i in 1:length(at_ids)){ #for variable within the length range of at_ids
@@ -57,6 +71,17 @@ for (i in 1:length(at_ids)){ #for variable within the length range of at_ids
   print(gid) #print the Entrez gene ID corresponding to the at id
   gi_ids = append(gi_ids, gid) #appends the list made before with the gid of the atid
 } 
+
+#there appears to be something wrong here with the variables, confusion of names
+#this section uses the at id's identified for the region and compiles a list of entrez gene id's with them via the mapping
+for (i in 1:length(ATBLASTGene_ids)){ #for variable within the length range of the blast gene id result
+  for (k in mapped.list) { #the GI from mapped list look 
+    print(k) #very different from the GI from the at_ids/CSV file...
+    print(ATBLASTGene_ids[i])
+    if(k==ATBLASTGene_ids[i])#############SAY "GI" %in% mapped.list[values] #### basically going the other way so asking is this Gene ID in the values of AT ID mapped list? if so what is the key [the at id]
+      gi_ids = c(gi_ids,k)}}
+  
+>>>>>>> Stashed changes
 gi_char = as.character(gi_ids) #converts the list of gene ids to character vector 
 #this is done because the factor values need to be characters
 gi_fac = as.factor(gi_char)#converts the character list of GIs to a factor list
